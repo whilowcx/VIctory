@@ -425,6 +425,7 @@ impl HostPipeline {
                 ..Default::default()
             };
             let name = super::library::name("compute", &root_blob, &[&code_bytes(&code(0))], "");
+            tracing::debug!(?shaders, "making host pipeline");
             let made = super::library::pipeline(
                 &name,
                 // SAFETY: the description points at live data.
@@ -464,6 +465,7 @@ impl HostPipeline {
                 &[&code_bytes(&code(0)), &code_bytes(&code(1))],
                 &state,
             );
+            tracing::debug!(?shaders, "making host pipeline");
             let pso = match mesh_pipeline(&host.device, &root, code(0), code(1), g, &name) {
                 Ok(pso) => pso,
                 Err(e) => {
@@ -518,6 +520,7 @@ impl HostPipeline {
             &[&code_bytes(&code(0)), &code_bytes(&code(1))],
             &state,
         );
+        tracing::debug!(?shaders, "making host pipeline");
         let made = super::library::pipeline(
             &name,
             // SAFETY: the description points at live data.
